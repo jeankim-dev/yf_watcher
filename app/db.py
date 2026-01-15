@@ -9,11 +9,17 @@ async def save_result(result: dict):
             CREATE TABLE IF NOT EXISTS screening_results (
                 symbol TEXT,
                 rsi REAL,
-                macd REAL
+                macd REAL,
+                rs REAL
             )
         """)
         await db.execute(
-            "INSERT INTO screening_results VALUES (?, ?, ?)",
-            (result["symbol"], result["rsi"], result["macd"])
+            "INSERT INTO screening_results VALUES (?, ?, ?, ?)",
+            (
+                result["symbol"],
+                result["rsi"],
+                result["macd"],
+                result["rs"],
+            )
         )
         await db.commit()
